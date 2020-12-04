@@ -1,0 +1,36 @@
+{
+  "name": "note-taker",
+  "version": "1.0.0",
+  "description": "Node.JS Express application to allow adding, viewing and removal of notes.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gehanstedt/note-taker.git"
+  },
+  "keywords": [
+    "Node.js",
+    "Express",
+    "Notes",
+    "Heroku",
+    "Deploy",
+    "Online",
+    "Georgia",
+    "Tech",
+    "Bootcamp",
+    "Coding",
+    "Homework"
+  ],
+  "author": "Greg Hanstedt",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/gehanstedt/note-taker/issues"
+  },
+  "homepage": "https://github.com/gehanstedt/note-taker#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
