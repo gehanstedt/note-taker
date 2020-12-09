@@ -3,30 +3,26 @@
 
 // Reservations and Wait List Initial Data (DATA)
 // =============================================================
-var reservations = [
+var notes = [
     {
-      customerName: "yoda",
-      phoneNumber: "800-THE-FRCE",
-      customerEmail: "yoda@usetheforce.com",
-      customerID: "MyID"
+      id: 0,
+      title: "Note 0",
+      text: "Note 0 text"
     },
     {
-      customerName: "yoda1",
-      phoneNumber: "800-THE-FRCE",
-      customerEmail: "yoda@usetheforce.com",
-      customerID: "MyID1"
+      id: 1,
+      title: "Note 1",
+      text: "Note 1 text"
     },
     {
-      customerName: "yoda2",
-      phoneNumber: "800-THE-FRCE",
-      customerEmail: "yoda@usetheforce.com",
-      customerID: "MyID2"
+      id: 2,
+      title: "Note 2",
+      text: "Note 2 text"
     },
     {
-      customerName: "yoda3",
-      phoneNumber: "800-THE-FRCE",
-      customerEmail: "yoda@usetheforce.com",
-      customerID: "MyID3"
+      id: 3,
+      title: "Note 3",
+      text: "Note 3 text"
     },
   ];
   
@@ -39,7 +35,7 @@ var reservations = [
 module.exports = function(app) {
     // API GET Requests
     // Displays JSON of all reservations
-    app.get("/api/reservations", function(req, res) {
+    app.get("/api/notes", function(req, res) {
         return res.json(reservations);
     });
   

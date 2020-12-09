@@ -1,0 +1,133 @@
+body {
+}
+
+#clearButton, #citySearchButton {
+    background-color:#0ad2f5;
+}
+
+.inputNoteTitle, .inputNoteText {
+    color: #000000;
+    width: 100%;
+    outline: none;
+    border: none;
+}
+  
+.inputNoteText {
+    resize: none;
+    height: calc(100% - 63px);
+    padding-top: 15px;
+}
+  
+.inputNoteTitle {
+    height: 50px;
+    margin-top: 13px;
+    font-size: 3rem;
+}
+  
+.inputNoteTitle:read-only, .inputNoteText:read-only {
+    color: #757575;
+}
+
+.ghHeader {
+    color: white;
+}
+
+.deleteNote {
+    color: red;
+}
+
+a, a:hover {
+    text-decoration: none;
+    
+}
+
+.noteListActive, .notelistActive:hover {
+    color: white;
+}
+
+#saveIcon {
+    font-size: 1.75rem;
+    color: #007bff;
+}
+
+#general-city-area {
+    border-style: solid;
+    border-right-style: none;
+    border-width: 1px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+
+
+.forecast-day {
+    color: white;
+}
+
+.navOne {
+    font-size: 1.5rem;
+}
+
+.navTwo {
+    padding-bottom: 12px;
+}
+
+a.noteSelector:link,a.noteSelector:visited {
+    color: white;
+}
+aside {
+    background-color: rgb(245, 245, 245);
+}
+
+#applicationName {
+    position: absolute; 
+    right: 20px;
+}
+
+.headerBar {
+    font-size: 17px;
+    display: block;
+}
+
+.uviGreen {
+    background-color: lightgreen;
+}
+
+.uviYellow {
+    background-color: yellow;
+}
+
+.uviOrange {
+    background-color: orange;
+}
+
+.uviRed {
+    background-color: red;
+    color: white;
+}
+
+.uviViolet {
+    background-color: violet;
+}
+
+main {
+}
+
+/* Make <h1> bold */
+h1 {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+h3 {
+    font-weight: normal;
+    font-size: 20px;
+}
+
