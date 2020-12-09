@@ -12,8 +12,15 @@ module.exports = function(app) {
     });
 
     // Default route if any other URL is selected to display the index.html page
-    app.get("*", function(req, res) {
+    app.get("/", function(req, res) {
         res.sendFile(path.join(__dirname, "../public/index.html"));
+        console.log (`User requested index.html via "/" route.`);
+    });
+
+    app.get("*", function(req, res) {
+        res.sendFile(path.join(__dirname, `../public${req.url}`));
+        console.log (req.url);
         console.log (`User requested index.html via "*" route.`);
     });
+
 }

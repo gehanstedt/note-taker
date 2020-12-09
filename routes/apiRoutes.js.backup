@@ -36,7 +36,6 @@ module.exports = function(app) {
     // API GET Requests
     // Displays JSON of all reservations
     app.get("/api/notes", function(req, res) {
-        console.log (`User requested notes JSON via "/api/notes" route.`);
         return res.json(notes);
     });
   
