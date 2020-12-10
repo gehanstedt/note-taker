@@ -1,42 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Note Taker</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/flatly/bootstrap.min.css" />
+  <!-- Reference stylesheets from bootstrap, Google for Cinzel font, local override stylesheet local-style.css -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
     crossorigin="anonymous">
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script src="https://kit.fontawesome.com/97ec67ec9e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/local-style.css">
 </head>
 
 <body>
-  <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Note Taker
-    </a>
-    <div class="icons">
-      <i class="fas fa-save text-light save-note"></i>
-      <i class="fas fa-pen text-light new-note"></i>
-    </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary ghHeader navOne">
+    <span id="companyName">G Dog Enterprises</span>
+    <span id="applicationName">Note Taker</span>
   </nav>
-  <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary ghHeader navTwo">
+    <span id="applicationName"><a href="#" class="noteSelector">Create a New Note</a></span>
+  </nav>
+
+  <main class="container-fluid">
     <div class="row">
-      <div class="col-4 list-container">
-        <div class="card">
-          <ul class="list-group">
-          </ul>
+      <aside class="col-md-4 col-xl-4">
+        <span id="noteTitlesGoHere" class="bg-secondary bd-sidebar">
+          <li class="list-group-item list-group-item-action"><a href="#" class="noteList">Atlanta</a><i class="fas fa-trash-alt float-right deleteNote"></i></li> 
+          <li class="list-group-item list-group-item-action"><a href="#" class="noteList">Atlanta</a><i class="fas fa-trash-alt float-right deleteNote"></i></li> 
+          <li class="list-group-item list-group-item-action"><a href="#" class="noteList">Atlanta</a><i class="fas fa-trash-alt float-right deleteNote"></i></li> 
+          <li class="list-group-item list-group-item-action active"><a href="#" class="noteListActive">Atlanta</a><i class="fas fa-trash-alt float-right deleteNote"></i></li> 
+          <li class="list-group-item list-group-item-action active"><a href="#" class="noteListActive">Las Vegas</a><i class="fas fa-trash-alt float-right deleteNote"></i></li> 
+
+          <a href="#" class="list-group-item list-group-item-action active">Las Vegas</a>
+        </span>
+      </aside>
+      <div class="col-md-7 col-xl-7 card-body" id="NoteArea">
+        <div class="row">
+          <div class="col-md=9 col-xl-9">
+            <input class="inputNoteTitle" placeholder="Note Title" maxlength="28" type="text">
+            <textarea class="inputNoteText" placeholder="Note Text"></textarea>
+          </div>
         </div>
       </div>
-      <div class="col-8">
-        <input class="note-title" placeholder="Note Title" maxlength="28" type="text">
-        <textarea class="note-textarea" placeholder="Note Text"></textarea>
+      <div class="col-md-1 col-xl-1 card-body" id="saveArea">
+        <i class="fas fa-save save-icon" style="display: inline;" id="saveIcon"></i>
       </div>
     </div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="/assets/js/index.js"></script>
+  </main>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="scripts/note-taker.js" type="text/javascript">
+  </script>
+
 </body>
 
 </html>
