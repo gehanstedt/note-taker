@@ -1,4 +1,4 @@
-var selectedNote;
+var selectedNoteID;
 var externalTableData;
 
 $(document).ready(function() {
@@ -6,6 +6,13 @@ $(document).ready(function() {
   // Empty the schedule to prepare for loading the schedule from JavaScript
   function emptyNoteTitles () {
       $("#noteTitlesGoHere").empty ();
+  }
+
+  function clearCurrentNote () {
+    selectedNoteID = -1;
+    $(".inputNoteTitle").val ("");
+    $(".inputNoteText").val ("");
+    showSaveIcon ();
   }
 
   function hideSaveIcon () {
@@ -59,26 +66,50 @@ $(document).ready(function() {
 		});
   }
 
+
+
   $("#noteTitlesGoHere").on ("click", ".noteList", function (event) {
     event.preventDefault ();
-    var idSelected;
+    
+    selectedNoteID = parseInt ($(this).attr("noteid"));
 
-    idSelected = $(this).attr("noteid");
-    console.log ("ID selected:  " + idSelected);
-
-    $(".inputNoteTitle").val (externalTableData[idSelected].title);
-    $(".inputNoteText").val (externalTableData[idSelected].text);
+    $(".inputNoteTitle").val (externalTableData[selectedNoteID].title);
+    $(".inputNoteText").val (externalTableData[selectedNoteID].text);
+    showSaveIcon ();
   });
 
   $("#noteTitlesGoHere").on ("click", ".deleteNote", function (event) {
     console.log(this);
 
     event.preventDefault ();
-    var idSelected;
-
-    idSelected = $(this).attr("noteid");
-    console.log ("Delete ID selected:  " + idSelected);
+    
+    selectedNoteID = parseInt ($(this).attr("noteid"));
+    console.log ("Delete ID selected:  " + selectedNoteID);
   });
+
+  $("#createNewNoteLink").on ("click", function (event) {
+    clearCurrentNote ();
+  });  
+
+  $("#saveIcon").on ("click", function (event) {
+    console.log ("Save icon clicked");
+    var currentURL = window.location.origin;
+    var dataPayload = {
+                        id: selectedNoteID,
+                        title: $(".inputNoteTitle").val ().trim (),
+                        text: $(".inputNoteText").val ().trim ()
+    }; 
+    
+    console.log (dataPayload);
+    
+		// The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+    $.post(currentURL + "/api/notes", dataPayload,
+    function (data) {
+      console.log (data);
+    });
+  });  
+
+
 
   hideSaveIcon ();
   displayNotes ();

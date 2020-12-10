@@ -1,8 +1,6 @@
 
 
-
-// Reservations and Wait List Initial Data (DATA)
-// =============================================================
+var nextNoteID = 4;
 var notes = [
     {
       id: 0,
@@ -54,17 +52,30 @@ module.exports = function(app) {
     });
   
     // Create New Reservation - takes in JSON input
-    app.post("/api/tables", function(req, res) {
+    app.post("/api/notes", function(req, res) {
         // req.body hosts is equal to the JSON post sent from the user
         // This works because of our body parsing middleware
-        var newReservation = req.body;
+        var noteObject = req.body;
     
         // Using a RegEx Pattern to remove spaces from newCharacter
         // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
         // newCharacter.routeName = newCharacter.name.replace(/\s+/g, "").toLowerCase();
     
-        console.log(newReservation);
-    
+        console.log(noteObject);
+
+        noteObject.id = parseInt (noteObject.id);
+        if (noteObject.id === -1) {
+          noteObject.id = nextNoteID;
+          notes.push (noteObject);
+        }
+
+        else {
+          notes [noteObject.id].title = noteObject.title;
+          notes [noteObject.id].text = noteObject.text;
+        }
+
+        console.log (notes);
+/*
         console.log (`Reservations length: ${reservations.length}`);
     
         if (reservations.length < 5) {
@@ -80,6 +91,7 @@ module.exports = function(app) {
         console.log (waitList);
         res.json (false);
         }
+*/
     });
 }
   
