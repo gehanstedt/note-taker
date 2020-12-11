@@ -1,5 +1,23 @@
-var selectedNoteID;
+var selectedNoteID = -1;
 var externalTableData;
+
+// Define $.delete method
+$.delete = function(url, data, callback){
+ 
+  if ( $.isFunction(data) ){
+    type = 'DELETE' || callback,
+        callback = data,
+        data = {}
+  }
+ 
+  return $.ajax({
+    url: url,
+    type: 'DELETE',
+    success: callback,
+    data: data,
+    contentType: 'DELETE'
+  });
+}
 
 $(document).ready(function() {
 
@@ -21,6 +39,12 @@ $(document).ready(function() {
 
   function showSaveIcon () {
     $("#saveIcon").attr ("style", "display: inline");
+  }
+
+  function loadNoteDetails (id) {
+    $(".inputNoteTitle").val (externalTableData[id].title);
+    $(".inputNoteText").val (externalTableData[id].text);
+    showSaveIcon ();
   }
 
   function renderNoteTitles (tableData) {
@@ -63,6 +87,9 @@ $(document).ready(function() {
         console.log("------------------------------------");
         
         renderNoteTitles (tableData);
+        if (selectedNoteID != -1) {
+          loadNoteDetails (selectedNoteID);
+        }
 		});
   }
 
@@ -73,9 +100,7 @@ $(document).ready(function() {
     
     selectedNoteID = parseInt ($(this).attr("noteid"));
 
-    $(".inputNoteTitle").val (externalTableData[selectedNoteID].title);
-    $(".inputNoteText").val (externalTableData[selectedNoteID].text);
-    showSaveIcon ();
+    loadNoteDetails (selectedNoteID);
   });
 
   $("#noteTitlesGoHere").on ("click", ".deleteNote", function (event) {
@@ -85,6 +110,39 @@ $(document).ready(function() {
     
     selectedNoteID = parseInt ($(this).attr("noteid"));
     console.log ("Delete ID selected:  " + selectedNoteID);
+
+    var currentURL = window.location.origin;
+    var dataPayload = {
+                        id: selectedNoteID
+    };
+    
+    $.delete(`${currentURL}/api/notes/${selectedNoteID}`, dataPayload, 
+    function (data) {
+      console.log (`Data:  ${data}`);
+    });
+
+    displayNotes ();
+
+    // Clear all reservations and waitlist
+/*
+    $.get(`${currentURL}/api/notes/${selectedNoteID}`, dataPayload, 
+    function (data) {
+      console.log (`Data:  ${data}`);
+    });
+*/
+
+/*
+    $.ajax({
+      type: 'POST',
+      headers: { 'X_METHODOVERRIDE': 'DELETE' },
+      url: currentURL + "/api/notes",
+      data: dataPayload,
+      success: function () {
+        console.log (`DELETE Note ID ${selectedNoteID} deleted`);
+      }});
+*/
+
+      
   });
 
   $("#createNewNoteLink").on ("click", function (event) {
@@ -105,13 +163,15 @@ $(document).ready(function() {
 		// The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
     $.post(currentURL + "/api/notes", dataPayload,
     function (data) {
-      console.log (data);
+      console.log (`Data:  ${data}`);
+      selectedNoteID = parseInt (data);
+      displayNotes ();
+      console.log (`Note ID: ${selectedNoteID}`);
+//      loadNoteDetails (selectedNoteID);;
     });
   });  
 
-
-
-  hideSaveIcon ();
+  showSaveIcon ();
   displayNotes ();
 
 });

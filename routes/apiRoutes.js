@@ -31,6 +31,7 @@ var notes = [
 // ===============================================================================
 
 module.exports = function(app) {
+    var counter;
     // API GET Requests
     // Displays JSON of all reservations
     app.get("/api/notes", function(req, res) {
@@ -51,8 +52,24 @@ module.exports = function(app) {
         return res.json(true);
     });
   
+    // Clear all reservations and waitlist
+    app.delete("/api/notes/:id", function(req, res) {
+      var idToDelete = parseInt (req.params.id);
+      console.log (`User requested "/api/notes/${idToDelete} via DELETE route.`);
+      console.log (`ID to be deleted:  ${idToDelete}`);
+
+      for (counter = 0; counter < notes.length; counter ++) {
+        if (notes[counter].id === idToDelete) {
+          notes.splice (counter, 1);
+        }
+      }
+
+      return res.json(true);
+    });
+
     // Create New Reservation - takes in JSON input
     app.post("/api/notes", function(req, res) {
+        console.log (`User requested /api/notes via POST route.`);
         // req.body hosts is equal to the JSON post sent from the user
         // This works because of our body parsing middleware
         var noteObject = req.body;
@@ -67,6 +84,7 @@ module.exports = function(app) {
         if (noteObject.id === -1) {
           noteObject.id = nextNoteID;
           notes.push (noteObject);
+          nextNoteID++;
         }
 
         else {
@@ -75,6 +93,8 @@ module.exports = function(app) {
         }
 
         console.log (notes);
+
+        res.json (noteObject.id);
 /*
         console.log (`Reservations length: ${reservations.length}`);
     
