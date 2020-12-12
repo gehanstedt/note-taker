@@ -1,6 +1,10 @@
+const fs = require("fs");
+const { json } = require("express");
+const filename = "./db/db.json"
 
-
-var nextNoteID = 4;
+var notes = JSON.parse(fs.readFileSync(filename, "utf8"));
+var nextNoteID = notes[notes.length - 1].id + 1;
+/*
 var notes = [
     {
       id: 0,
@@ -23,8 +27,18 @@ var notes = [
       text: "Note 3 text"
     },
   ];
+ */
   
   var waitList = [];
+
+  function loadNotesFromFile () {
+    json.str
+  }
+
+  function saveNotesToFile () {
+    localStorage.setItem ("GDOG-Work-Day-Scheduler", JSON.stringify(calendarDayText));
+  }
+
 
 // ===============================================================================
 // ROUTING
@@ -45,14 +59,6 @@ module.exports = function(app) {
     });
   
     // Clear all reservations and waitlist
-    app.post("/api/clear", function(req, res) {
-        console.log ("Clearing both reservations and waitList");
-        waitList = [];
-        reservations = [];
-        return res.json(true);
-    });
-  
-    // Clear all reservations and waitlist
     app.delete("/api/notes/:id", function(req, res) {
       var idToDelete = parseInt (req.params.id);
       console.log (`User requested "/api/notes/${idToDelete} via DELETE route.`);
@@ -63,6 +69,10 @@ module.exports = function(app) {
           notes.splice (counter, 1);
         }
       }
+
+      fs.writeFileSync(filename, JSON.stringify(notes), function(err) {
+        if (err) throw (err);        
+      }); 
 
       return res.json(true);
     });
@@ -93,6 +103,10 @@ module.exports = function(app) {
         }
 
         console.log (notes);
+
+        fs.writeFileSync(filename, JSON.stringify(notes), function(err) {
+          if (err) throw (err);        
+        }); 
 
         res.json (noteObject.id);
 /*
