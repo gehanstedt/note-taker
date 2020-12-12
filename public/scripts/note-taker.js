@@ -42,8 +42,15 @@ $(document).ready(function() {
   }
 
   function loadNoteDetails (id) {
-    $(".inputNoteTitle").val (externalTableData[id].title);
-    $(".inputNoteText").val (externalTableData[id].text);
+    var counter = 0;
+    console.log (`loadNoteDetails -->  ID: ${id}`);
+
+    for (counter = 0; counter < externalTableData.length; counter ++) {
+      if (externalTableData[counter].id === id) {
+        $(".inputNoteTitle").val (externalTableData[counter].title);
+        $(".inputNoteText").val (externalTableData[counter].text);
+      }
+    }
     showSaveIcon ();
   }
 
